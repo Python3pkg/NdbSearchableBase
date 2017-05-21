@@ -108,10 +108,10 @@ class SearchableModel(object):
         if self.searchable_fields is None:
             searchable_fields = []
 
-            for field, prop in self._properties.items():
+            for field, prop in list(self._properties.items()):
                 if field == 'class':
                     continue
-                for class_, field_type in SEARCHABLE_PROPERTY_TYPES.items():
+                for class_, field_type in list(SEARCHABLE_PROPERTY_TYPES.items()):
                     if isinstance(prop, class_):
                         searchable_fields.append(field)
         else:
@@ -122,7 +122,7 @@ class SearchableModel(object):
             value = getattr(self, f)
             field = None
             field_found = False
-            for class_, field_type in SEARCHABLE_PROPERTY_TYPES.items():
+            for class_, field_type in list(SEARCHABLE_PROPERTY_TYPES.items()):
                 if isinstance(prop, class_):
                     field_found = True
                     if value is not None:
